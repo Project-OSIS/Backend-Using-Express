@@ -15,7 +15,6 @@ const router = Router()
 router.use('/auth', RouteAuth)
 router.use('/structure', RouteStructure)
 router.use('/proker', RouteProker)
-router.use('/proker', RouteProker)
 router.use('/user', RouteUser)
 
 
