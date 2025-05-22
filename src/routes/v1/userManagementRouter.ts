@@ -7,8 +7,8 @@ const router = Router()
 router.get('/get-user', [checkJwt ,getAllUsers])
 router.get('/get-user/id', [checkJwt ,getUserById])
 router.post('/create-user', createUser)
-router.post('/updateuser/id', updateUser)
-router.post('/deleteuser/id', deleteUser)
+router.post('/update-user/id', updateUser)
+router.post('/delete-user/id', deleteUser)
 
 
 
