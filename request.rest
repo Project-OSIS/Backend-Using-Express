@@ -1,0 +1,168 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdhNjA2MWVhLTZlZWYtNDg3ZS1hOGYxLWEwYjU2MTRlYmM1MSIsImVtYWlsIjoiQWRtaW4xQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjUtMDUtMTlUMjA6MDA6NTYuMTkzWiIsImlhdCI6MTc0NzY4NTU3MywiZXhwIjoxNzUwMjc3NTczfQ.nuKZkuKpGePKIYvw6U2LVgvNmTryE9tChewBUQfwjYo
+
+
+###
+POST  http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{     "email"    : "Admin1@gmail.com",
+      "password" : "Admin123!"
+}
+
+###
+POST  http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{     "email"    : "Admin1@gmail.com",
+      "password" : "Admin123!"
+}
+
+
+
+
+
+
+###
+GET  http://localhost:5000/api/v1/auth/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{     "email"    : "Admin1",
+      "password" : "Admin123!"
+}
+
+
+
+###
+GET  http://localhost:5000/api/v1/user/get-user
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+GET  http://localhost:5000/api/v1/user/get-user/id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+POST  http://localhost:5000/api/v1/user/create-user
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  {
+  "email": "admin@example.com",
+  "password": "secret123",
+  "role": "PEMOSIS"
+}
+}
+
+
+###
+PUT  http://localhost:5000/api/v1/user/update-user/id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  {
+  "email": "admin@example.com",
+  "password": "secret123",
+  "role": "PEMOSIS"
+}
+}
+
+
+###
+POST   http://localhost:5000/api/v1/user/delete-user/id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+
+
+
+
+
+
+
+
+
+###
+POST  http://localhost:5000/api/v1/proker/create-proker
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Kegiatan Outing Bersama",
+  "description": "Kami akan mengadakan outing bersama di taman hiburan.",
+  "image": "https://example.com/outing.jpg "
+}
+
+
+###
+PUT  http://localhost:5000/api/v1/proker/update-proker/id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Kegiatan Outing Bersama",
+  "description": "Kami akan mengadakan outing bersama di taman hiburan.",
+  "image": "https://example.com/outing.jpg "
+}
+
+
+###
+POST   http://localhost:5000/api/v1/proker/delete-proker/id
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+###
+GET  http://localhost:5000/api/v1/structure/get-structure
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###
+POST  http://localhost:5000/api/v1/structure/create-structure
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{  {
+  "organizations": [
+    {
+      "id": "uuid-of-structure-position-1",
+      "organizationStructurePerson": [
+        {
+          "personId": null,
+          "name": "John Doe",
+          "description": "CEO of the company",
+          "picture": "https://example.com/john.jpg "
+        },
+        {
+          "personId": "existing-person-id-1",
+          "name": "Jane Smith",
+          "description": "CTO of the company",
+          "picture": "https://example.com/jane.jpg "
+        }
+      ]
+    },
+    {
+      "id": "uuid-of-structure-position-2",
+      "organizationStructurePerson": [
+        {
+          "personId": null,
+          "name": "Alice Johnson",
+          "description": "Head of Marketing",
+          "picture": "https://example.com/alice.jpg "
+        }
+      ]
+    }
+  ]
+}
+}
+
