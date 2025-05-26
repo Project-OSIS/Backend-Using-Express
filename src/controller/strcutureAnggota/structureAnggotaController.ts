@@ -5,7 +5,7 @@ import { user } from '../../model/user';
 import { StructurePosition } from '../../model/structurePosition';
 import { StructurePerson } from '../../model/structurePerson';
 
-const { successResponse, validationResponse, responseHandler } = require('../utils/response');
+const { successResponse, validationResponse, responseHandler } = require('../../utils/response');
 const userRepository = AppDataSource.getRepository(user);
 const structurePositionRepository = AppDataSource.getRepository(StructurePosition);
 const structurePersonRepository = AppDataSource.getRepository(StructurePerson);
