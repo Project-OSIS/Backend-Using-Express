@@ -3,7 +3,7 @@ import Joi from 'joi';
 import { AppDataSource } from '../../data-source';
 import { proker } from '../../model/proker';
 
-const { successResponse, validationResponse, responseHandler } = require('../utils/response');
+const { successResponse, validationResponse, responseHandler } = require('../../utils/response');
 
 const prokerRepository = AppDataSource.getRepository(proker);
 
