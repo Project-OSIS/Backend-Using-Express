@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdhNjA2MWVhLTZlZWYtNDg3ZS1hOGYxLWEwYjU2MTRlYmM1MSIsImVtYWlsIjoiQWRtaW4xQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjUtMDUtMTlUMjA6MDA6NTYuMTkzWiIsImlhdCI6MTc0NzY4NTU3MywiZXhwIjoxNzUwMjc3NTczfQ.nuKZkuKpGePKIYvw6U2LVgvNmTryE9tChewBUQfwjYo
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5NjYwYzNhLWU2ZTQtNDY0Mi05ZmJjLWNlNzQ1OTg0Y2JhYiIsImVtYWlsIjoiQWRtaW4xQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjUtMDUtMjdUMDA6MTA6NDcuNzczWiIsImlhdCI6MTc0ODMwNDY1NSwiZXhwIjoxNzUwODk2NjU1fQ.x81IyZX17hNXHXQ57IBb8IyehJW6xz9XGQADeC-Oz1Y
 
 
 ###
@@ -33,6 +33,10 @@ Authorization: Bearer {{token}}
 }
 
 
+###
+GET  http://localhost:5000/api/v1/user/user-seed
+Content-Type: application/json
+Authorization: Bearer {{token}}
 
 ###
 GET  http://localhost:5000/api/v1/user/get-user
