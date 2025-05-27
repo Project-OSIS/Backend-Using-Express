@@ -5,7 +5,8 @@ import { StructurePosition } from "./structurePosition";
 import { IsString, IsUppercase } from "class-validator";
 
 export enum UserRole {
-    PEMBINA = 'PEMOSIS',
+    ADMIN = 'ADMIN',
+    PEMBINA = 'PEMBINA',
     ANGGOTA = 'ANGGOTA'
 }
 
