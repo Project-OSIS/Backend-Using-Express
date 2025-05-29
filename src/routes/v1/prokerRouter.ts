@@ -6,8 +6,8 @@ const router = Router()
 
 router.get('/get-proker', [checkJwt ,getAllProkers])
 router.get('/get-proker/id', [checkJwt ,getProkerById])
-router.post('/create-proker', createProker)
-router.post('/update-proker/id', updateProker)
+router.post('/create-proker', [checkJwt ,createProker])
+router.post('/update-proker/id', [checkJwt ,updateProker])
 router.post('/delete-proker/id', deleteProker)
 
 

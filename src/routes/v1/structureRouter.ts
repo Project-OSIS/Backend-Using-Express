@@ -5,7 +5,7 @@ import { getOrganizationStructure,createOrganizationStructure } from '../../cont
 const router = Router()
 
 router.get('/get-structure', [checkJwt ,getOrganizationStructure])
-router.post('/create-structure', createOrganizationStructure)
+router.post('/create-structure', [checkJwt ,createOrganizationStructure])
 
 
 export default router
