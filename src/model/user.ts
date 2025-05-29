@@ -10,6 +10,11 @@ export enum UserRole {
     ANGGOTA = 'ANGGOTA'
 }
 
+export enum StatusFormat {
+    ENABLE = 'ENABLE',
+    DISABLE = 'DISABLE',
+}
+
 @Entity()
 export class user {
 
@@ -37,6 +42,14 @@ export class user {
     public role: UserRole
 
     @Column({
+        type: 'enum',
+        enum: StatusFormat,
+    })
+    @IsString()
+    @IsUppercase()
+    public status: StatusFormat
+
+    @Column({
         default: null,
         nullable: false
     })
@@ -44,7 +57,7 @@ export class user {
 
     @Column({
         default: null,
-        nullable: false
+        nullable: true
     })
     @IsString()
     public image: string
