@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs';
 import { AppDataSource } from '../../data-source';
 import { user } from '../../model/user';
 import { UserRole } from '../../model/user';
+import { StatusFormat } from '../../model/user';
+
 import multer from 'multer';  
 import path from 'path';  
 import { Tree } from 'typeorm';
@@ -38,13 +40,17 @@ export const createUser = async (req: Request, res: Response) => {
             password: Joi.string().min(6).required(),
             role: Joi.string().valid(...Object.values(UserRole)).required(),
             username: Joi.string().required(),
+            image: Joi.any().optional().allow('', null), // Izinkan string kosong atau null
+            status: Joi.string().valid(...Object.values(StatusFormat)).required(),
+
+
 
         });
 
         const { error } = schema.validate(req.body);
         if (error) return res.status(400).send(errorResponse(error.details[0].message));
 
-        const { email, password, role,username } = req.body;
+        const { email, password, role,username,status } = req.body;
 
         // Cek apakah email sudah terdaftar
         const existingUser = await userRepository.findOneBy({ email });
@@ -56,11 +62,15 @@ export const createUser = async (req: Request, res: Response) => {
         newUser.email = email;
         newUser.password = bcrypt.hashSync(password, 8);
         newUser.role = role;
+        newUser.status = status
         newUser.username = username;
 
         if (req.file) {  
                 newUser.image = req.file.path; // Menyimpan path file  
         }  
+
+        console.log("create user",newUser)
+
 
         const savedUser = await userRepository.save(newUser);
 
@@ -132,7 +142,11 @@ export const updateUser = async (req: Request, res: Response) => {
             email: Joi.string().email().optional(),
             password: Joi.string().min(6).optional(),
             role: Joi.string().valid(...Object.values(UserRole)).optional(),
-            username : Joi.string().optional()
+            username : Joi.string().optional(),
+            image: Joi.any().optional().allow('', null),// Izinkan string kosong atau null
+            status: Joi.string().valid(...Object.values(StatusFormat)).required(),
+
+
         });
 
         const { error: idError } = idSchema.validate({ id: req.params.id });
@@ -145,13 +159,16 @@ export const updateUser = async (req: Request, res: Response) => {
         if (!foundUser) return res.status(404).send(errorResponse('User not found'));
 
         // Update fields
-        if (req.body.email) foundUser.email = req.body.email;
-        if (req.body.password) foundUser.password = bcrypt.hashSync(req.body.password, 8);
-        if (req.body.role) foundUser.role = req.body.role;
-        if (req.body.username) foundUser.username = req.body.username;
+        foundUser.email = req.body.email;
+        foundUser.password = bcrypt.hashSync(req.body.password, 8);
+        foundUser.role = req.body.role;
+        foundUser.status = req.body.status
+        foundUser.username = req.body.username;
         if (req.file) {  
                 foundUser.image = req.file.path; // Menyimpan path file  
-        }  
+        } 
+        
+        console.log("create user",updateUser)
 
         const updatedUser = await userRepository.save(foundUser);
 
