@@ -9,8 +9,8 @@ router.get('/user-seed', userSeeder)
 router.get('/get-user', [checkJwt ,getAllUsers])
 router.get('/get-user/:id', [checkJwt ,getUserById])
 router.post('/create-user', createUser)
-router.post('/update-user/id', updateUser)
-router.post('/delete-user/id', deleteUser)
+router.post('/update-user/:id', updateUser)
+router.post('/delete-user/:id', deleteUser)
 
 
 
