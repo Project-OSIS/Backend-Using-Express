@@ -6,6 +6,7 @@ import { user } from '../../model/user';
 import { UserRole } from '../../model/user';
 import multer from 'multer';  
 import path from 'path';  
+import { Tree } from 'typeorm';
 
 const userRepository = AppDataSource.getRepository(user);
 
@@ -35,13 +36,15 @@ export const createUser = async (req: Request, res: Response) => {
         const schema = Joi.object({
             email: Joi.string().email().required(),
             password: Joi.string().min(6).required(),
-            role: Joi.string().valid(...Object.values(UserRole)).required()
+            role: Joi.string().valid(...Object.values(UserRole)).required(),
+            username: Joi.string().required(),
+
         });
 
         const { error } = schema.validate(req.body);
         if (error) return res.status(400).send(errorResponse(error.details[0].message));
 
-        const { email, password, role } = req.body;
+        const { email, password, role,username } = req.body;
 
         // Cek apakah email sudah terdaftar
         const existingUser = await userRepository.findOneBy({ email });
@@ -53,6 +56,7 @@ export const createUser = async (req: Request, res: Response) => {
         newUser.email = email;
         newUser.password = bcrypt.hashSync(password, 8);
         newUser.role = role;
+        newUser.username = username;
 
         if (req.file) {  
                 newUser.image = req.file.path; // Menyimpan path file  
@@ -76,6 +80,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
                 id: true,
                 email: true,
                 role: true,
+                username : true,
                 createdAt: true,
                 updatedAt: true
             }
@@ -126,7 +131,8 @@ export const updateUser = async (req: Request, res: Response) => {
         const bodySchema = Joi.object({
             email: Joi.string().email().optional(),
             password: Joi.string().min(6).optional(),
-            role: Joi.string().valid(...Object.values(UserRole)).optional()
+            role: Joi.string().valid(...Object.values(UserRole)).optional(),
+            username : Joi.string().optional()
         });
 
         const { error: idError } = idSchema.validate({ id: req.params.id });
@@ -142,6 +148,7 @@ export const updateUser = async (req: Request, res: Response) => {
         if (req.body.email) foundUser.email = req.body.email;
         if (req.body.password) foundUser.password = bcrypt.hashSync(req.body.password, 8);
         if (req.body.role) foundUser.role = req.body.role;
+        if (req.body.username) foundUser.username = req.body.username;
         if (req.file) {  
                 foundUser.image = req.file.path; // Menyimpan path file  
         }  
