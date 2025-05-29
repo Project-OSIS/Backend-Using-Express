@@ -18,7 +18,7 @@ export class user {
 
     @Column({
         unique: true,
-        nullable: false
+        nullable: true
     })
     public email: string
 
@@ -35,6 +35,19 @@ export class user {
     @IsString()
     @IsUppercase()
     public role: UserRole
+
+    @Column({
+        default: null,
+        nullable: false
+    })
+    public username: string
+
+    @Column({
+        default: null,
+        nullable: false
+    })
+    @IsString()
+    public image: string
 
 
     @CreateDateColumn()
