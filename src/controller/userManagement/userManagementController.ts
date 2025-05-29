@@ -4,8 +4,23 @@ import bcrypt from 'bcryptjs';
 import { AppDataSource } from '../../data-source';
 import { user } from '../../model/user';
 import { UserRole } from '../../model/user';
+import multer from 'multer';  
+import path from 'path';  
 
 const userRepository = AppDataSource.getRepository(user);
+
+const storage = multer.diskStorage({    
+    destination: (req, file, cb) => {    
+        cb(null, 'public/image/userProfile'); // Pastikan folder ini ada    
+    },    
+    filename: (req, file, cb) => {    
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);    
+        cb(null, uniqueSuffix + path.extname(file.originalname));   
+    }    
+});    
+  
+export const upload = multer({ storage: storage });  
+
 
 // Utility response functions
 const successResponse = (message: string, data?: any) => ({
@@ -38,6 +53,10 @@ export const createUser = async (req: Request, res: Response) => {
         newUser.email = email;
         newUser.password = bcrypt.hashSync(password, 8);
         newUser.role = role;
+
+        if (req.file) {  
+                newUser.image = req.file.path; // Menyimpan path file  
+        }  
 
         const savedUser = await userRepository.save(newUser);
 
@@ -83,6 +102,8 @@ export const getUserById = async (req: Request, res: Response) => {
             where: { id: req.params.id },
             relations: ['userStructure', 'userPosition']
         });
+        foundUser.image = foundUser.image ? `${foundUser.image.replace(/\\/g, '/')}` : null; // Ganti dengan domain Anda  
+
 
         if (!foundUser) {
             return res.status(404).send(errorResponse('User not found'));
@@ -121,6 +142,9 @@ export const updateUser = async (req: Request, res: Response) => {
         if (req.body.email) foundUser.email = req.body.email;
         if (req.body.password) foundUser.password = bcrypt.hashSync(req.body.password, 8);
         if (req.body.role) foundUser.role = req.body.role;
+        if (req.file) {  
+                foundUser.image = req.file.path; // Menyimpan path file  
+        }  
 
         const updatedUser = await userRepository.save(foundUser);
 
