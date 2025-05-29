@@ -28,10 +28,6 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 
-{     "email"    : "Admin1",
-      "password" : "Admin123!"
-}
-
 
 ###
 GET  http://localhost:5000/api/v1/user/user-seed
@@ -39,7 +35,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ###
-GET  http://localhost:5000/api/v1/user/get-user
+GET  http://localhost:5000/api/v1/user/get-user 
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
