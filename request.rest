@@ -41,7 +41,7 @@ Authorization: Bearer {{token}}
 
 
 ###
-GET  http://localhost:5000/api/v1/user/get-user/id
+GET http://localhost:5000/api/v1/user/get-user/07afe548-dd33-4a97-b9fa-de6176776c7c
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -50,31 +50,35 @@ POST  http://localhost:5000/api/v1/user/create-user
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{
   {
+  "username": "jahfal",
   "email": "admin@example.com",
   "password": "secret123",
-  "role": "PEMOSIS"
-}
+  "role": "ADMIN",
+  "image" : ""
+
 }
 
 
 ###
-PUT  http://localhost:5000/api/v1/user/update-user/id
+PUT  http://localhost:5000/api/v1/user/update-user/07afe548-dd33-4a97-b9fa-de6176776c7c
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-{
+
   {
-  "email": "admin@example.com",
+  "username": "test",
+  "email": "test@example.com",
   "password": "secret123",
-  "role": "PEMOSIS"
+  "role": "ADMIN",
+  "image" : ""
+
 }
-}
+
 
 
 ###
-POST   http://localhost:5000/api/v1/user/delete-user/id
+POST   http://localhost:5000/api/v1/user/delete-user/07afe548-dd33-4a97-b9fa-de6176776c7c
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
